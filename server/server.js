@@ -1,54 +1,8 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
-const {
-  GraphQLSchema,
-  GraphQLObjectType,
-  GraphQLString,
-  GraphQLID,
-  GraphQLList,
-} = require("graphql");
-
-const Users = require("./users");
-// console.log(Users);
-
+const { GraphQLSchema } = require("graphql");
+const RootQuery = require("./schema");
 const app = express();
-
-const UsersType = new GraphQLObjectType({
-  name: "User",
-  fields: () => ({
-    id: { type: GraphQLID },
-    name: { type: GraphQLString },
-    email: { type: GraphQLString },
-    phone: { type: GraphQLString },
-    address: { type: GraphQLString },
-  }),
-});
-
-const RootQuery = new GraphQLObjectType({
-  name: "RootQueryType",
-  fields: {
-    helloWorld: {
-      type: GraphQLString,
-      resolve: () => {
-        return "Hello World";
-      },
-    },
-    users: {
-      type: new GraphQLList(UsersType),
-      resolve: () => {
-        return Users;
-      },
-    },
-    user: {
-      type: UsersType,
-      args: { id: { type: GraphQLID } },
-      resolve: (parent, args) => {
-        const user = Users.find((item) => item.id === parseInt(args.id));
-        return user;
-      },
-    },
-  },
-});
 
 const graphSchema = new GraphQLSchema({
   query: RootQuery,
