@@ -1,13 +1,15 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { GraphQLSchema } = require("graphql");
-const RootQuery = require("./schema");
+const RootQuery = require("./schema/schema");
+const cors = require("cors");
 const app = express();
 
 const graphSchema = new GraphQLSchema({
   query: RootQuery,
 });
 
+app.use(cors());
 app.use(
   "/graphql",
   graphqlHTTP({

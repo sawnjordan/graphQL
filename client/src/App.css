@@ -1,0 +1,15 @@
+.app {
+  max-width: 70rem;
+  margin: 10rem auto;
+}
+
+.userlists {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.useritem {
+  border: 1px solid #000;
+  padding: 6px;
+  margin-bottom: 5px;
+}

@@ -5,7 +5,7 @@ const {
   GraphQLList,
 } = require("graphql");
 
-const Users = require("./users");
+const Users = require("../users");
 // console.log(Users);
 
 const UsersType = new GraphQLObjectType({
